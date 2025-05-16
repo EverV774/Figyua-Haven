@@ -6,8 +6,8 @@ package bdd;
 
 import javax.swing.*;
 import clases.Validador;
-import clases.Usuarios;
 import static java.awt.Color.BLACK;
+import clases.Usuarios;
 import static java.awt.Color.RED;
 import java.util.ArrayList;
 
@@ -25,6 +25,12 @@ public class LoginEmpresa extends javax.swing.JFrame {
     
     public LoginEmpresa() {
         initComponents();
+        
+        JScrollPane scrollPane = new JScrollPane(panelPrincipal);
+        this.setContentPane(scrollPane); // Reemplaza el contenido del JFrame con el JScrollPane
+        this.setSize(850, 650);
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         btnVer1.setVisible(false);
         btnVer3.setVisible(false);
@@ -98,6 +104,7 @@ public class LoginEmpresa extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         generoG = new javax.swing.ButtonGroup();
         rangoG = new javax.swing.ButtonGroup();
+        panelPrincipal = new javax.swing.JPanel();
         VaciarIn = new javax.swing.JButton();
         IngresarIn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -139,6 +146,7 @@ public class LoginEmpresa extends javax.swing.JFrame {
         );
 
         Registro.setModal(true);
+        Registro.setPreferredSize(new java.awt.Dimension(1480, 720));
         Registro.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 RegistroWindowClosing(evt);
@@ -273,6 +281,12 @@ public class LoginEmpresa extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel27.setText("Usuario:");
         Registro.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, -1, -1));
+
+        txtUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuActionPerformed(evt);
+            }
+        });
         Registro.getContentPane().add(txtUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 320, 40));
         Registro.getContentPane().add(ErrorUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 320, 20));
 
@@ -347,18 +361,14 @@ public class LoginEmpresa extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         VaciarIn.setBackground(new java.awt.Color(255, 153, 153));
         VaciarIn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         VaciarIn.setText("Vaciar");
         VaciarIn.setBorder(null);
-        VaciarIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VaciarInActionPerformed(evt);
-            }
-        });
-        getContentPane().add(VaciarIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 600, 150, 40));
+        panelPrincipal.add(VaciarIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 600, 150, 40));
 
         IngresarIn.setBackground(new java.awt.Color(255, 153, 153));
         IngresarIn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -369,13 +379,13 @@ public class LoginEmpresa extends javax.swing.JFrame {
                 IngresarInActionPerformed(evt);
             }
         });
-        getContentPane().add(IngresarIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 600, 150, 40));
+        panelPrincipal.add(IngresarIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 600, 150, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("Contraseña:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 470, -1, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 380, 40));
-        getContentPane().add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 510, 380, 40));
+        panelPrincipal.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 470, -1, -1));
+        panelPrincipal.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 380, 40));
+        panelPrincipal.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 510, 380, 40));
 
         btnRegistro.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         btnRegistro.setText("Registrarse...");
@@ -386,9 +396,9 @@ public class LoginEmpresa extends javax.swing.JFrame {
                 btnRegistroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 650, 100, -1));
-        getContentPane().add(lblError3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 550, 380, 30));
-        getContentPane().add(lblError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, 380, 20));
+        panelPrincipal.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 650, 100, -1));
+        panelPrincipal.add(lblError3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 550, 380, 30));
+        panelPrincipal.add(lblError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, 380, 20));
 
         btnVer4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo1.png"))); // NOI18N
         btnVer4.setBorderPainted(false);
@@ -398,7 +408,7 @@ public class LoginEmpresa extends javax.swing.JFrame {
                 btnVer4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 510, -1, 40));
+        panelPrincipal.add(btnVer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 510, -1, 40));
 
         btnVer5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo2.png"))); // NOI18N
         btnVer5.setBorderPainted(false);
@@ -408,113 +418,51 @@ public class LoginEmpresa extends javax.swing.JFrame {
                 btnVer5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVer5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 510, -1, 40));
+        panelPrincipal.add(btnVer5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 510, -1, 40));
 
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rojo1.png"))); // NOI18N
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 0, -1, 200));
+        panelPrincipal.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 0, -1, 200));
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ca1.png"))); // NOI18N
-        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 490, 40, 50));
+        panelPrincipal.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, 40, 50));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rojo1.png"))); // NOI18N
-        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 430, -1, -1));
+        panelPrincipal.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 430, -1, 290));
 
         jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rojo1.png"))); // NOI18N
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 140, -1, -1));
-        getContentPane().add(lblError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 380, 20));
-
-        txtCO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCOActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCO, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 380, 40));
+        panelPrincipal.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 140, -1, -1));
+        panelPrincipal.add(lblError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 380, 20));
+        panelPrincipal.add(txtCO, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 380, 40));
 
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel41.setText("Correo:");
-        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, -1, -1));
+        panelPrincipal.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, -1, -1));
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel42.setText("Usuario:");
-        getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 270, -1, -1));
+        panelPrincipal.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 270, -1, -1));
 
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/u1.png"))); // NOI18N
-        getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 40, 50));
+        panelPrincipal.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 40, 50));
 
         jLabel44.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/c1.png"))); // NOI18N
-        getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, 40, 50));
+        panelPrincipal.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 400, 40, 50));
 
         jLabel36.setBackground(new java.awt.Color(255, 255, 0));
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diapositiva1.PNG"))); // NOI18N
-        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1280, 720));
+        panelPrincipal.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+
+        getContentPane().add(panelPrincipal, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void VaciarInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarInActionPerformed
-        txtUsuario.setText("");
-        txtContrasena.setText("");
-        txtCO.setText("");
-    }//GEN-LAST:event_VaciarInActionPerformed
-
-    private void IngresarInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarInActionPerformed
-        String correo=txtCO.getText().toLowerCase();
-        boolean aux1=inicio.validarCorreo(correo);
-        lblError2.setText("");
-        lblError2.setForeground(BLACK);
-        int i=0;
-        if (aux1==false){
-            lblError1.setText("El correo no esta bien escrito");
-            lblError1.setForeground(RED);
-        }
-        else {
-            lblError1.setText("");
-            lblError1.setForeground(BLACK);
-        }
-        String contrasena=txtContrasena.getText();
-        boolean aux2=inicio.validarContrasena(contrasena);
-        if (aux2==false){
-            lblError3.setText("La contraseña no tiene 8 caracteres");
-            lblError3.setForeground(RED);
-        }
-        else {
-            lblError3.setText("");
-            lblError3.setForeground(BLACK);
-        }
-        String usuario=txtUsuario.getText();
-        int accion=-1;
-        if (aux1==true&&aux2==true) accion=inicio.validarCredenciales(correo,usuario,contrasena,ListaU);
-        if (accion==1){
-            lblError1.setText("El correo ingresado no se encontró");
-            lblError1.setForeground(RED);
-        }
-        if (accion==2){
-            lblError2.setText("El usuario no coincide");
-            lblError2.setForeground(RED);
-        }
-        if (accion==3){
-            lblError3.setText("La contraseña no es correcta");
-            lblError3.setForeground(RED);
-        }
-        if (accion==0){
-            Ingreso.setSize(1240,700);
-            Ingreso.setLocation(0,0);
-            Ingreso.setVisible(true);
-        }
-    }//GEN-LAST:event_IngresarInActionPerformed
-
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        Registro.setSize(1290,1020);
-        Registro.setLocation(0,0);
-        Registro.setVisible(true);
-    }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void rMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rMasculinoActionPerformed
         // TODO add your handling code here:
@@ -676,6 +624,9 @@ public class LoginEmpresa extends javax.swing.JFrame {
         if(rn==true&&rap==true&&ram==true&&rg==true&&rang==true&&rc==true&&ru==true&&rusu==true&&rc1==true&&rc2==true){
             Usuarios x=new Usuarios(n,ap,am,g,JCalendario.getDateFormatString(),txtCorreo.getText(),txtUsu.getText(),txtContrasena2.getText(),r);
             ListaU.add(x);
+            if(Correos.enviarCorreoConPDF(txtCorreo.getText(), Correos.generarPDF(n, txtUsu.getText(), ap, am, txtCorreo.getText(), txtContrasena1.getText()))){
+                JOptionPane.showMessageDialog(null, "Correo enviado");
+            }
             Registro.setVisible(false);
             btnVaciar2.doClick();
         }
@@ -722,25 +673,37 @@ public class LoginEmpresa extends javax.swing.JFrame {
         btnVer3.setVisible(false);
     }//GEN-LAST:event_btnVer3ActionPerformed
 
-    private void btnVer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVer4ActionPerformed
-        txtContrasena.setEchoChar((char)0);
-        btnVer4.setVisible(false);
-        btnVer5.setVisible(true);
-    }//GEN-LAST:event_btnVer4ActionPerformed
+    private void rClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rClienteActionPerformed
+
+    private void txtUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        // TODO add your handling code here:
+        Registro.setSize(1200, 800);
+        Registro.setVisible(true); 
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void IngresarInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IngresarInActionPerformed
 
     private void btnVer5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVer5ActionPerformed
+        // TODO add your handling code here:
         txtContrasena.setEchoChar('●');
         btnVer4.setVisible(true);
         btnVer5.setVisible(false);
     }//GEN-LAST:event_btnVer5ActionPerformed
 
-    private void rClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rClienteActionPerformed
+    private void btnVer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVer4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rClienteActionPerformed
-
-    private void txtCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCOActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCOActionPerformed
+        txtContrasena.setEchoChar((char)0);
+        btnVer4.setVisible(false);
+        btnVer5.setVisible(true);
+    }//GEN-LAST:event_btnVer4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -841,6 +804,7 @@ public class LoginEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel lblError1;
     private javax.swing.JLabel lblError2;
     private javax.swing.JLabel lblError3;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JRadioButton rCliente;
     private javax.swing.JRadioButton rEmpleado;
     private javax.swing.JRadioButton rFemenino;
