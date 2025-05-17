@@ -42,8 +42,8 @@ public class Correos {
     }
     
     public static boolean enviarCorreoConPDF(String destinatario, File archivoAdjunto) {
-        final String remitente = "hevervelasco606@gmail.com";
-        final String clave = "stmm ewio cetp arpm";
+        final String remitente = "figyuahaven647@gmail.com";
+        final String clave = "zdcu bktx iwko lycm";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
