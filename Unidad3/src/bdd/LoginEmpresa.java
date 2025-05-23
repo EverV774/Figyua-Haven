@@ -146,7 +146,6 @@ public class LoginEmpresa extends javax.swing.JFrame {
         );
 
         Registro.setModal(true);
-        Registro.setPreferredSize(new java.awt.Dimension(1480, 720));
         Registro.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 RegistroWindowClosing(evt);
