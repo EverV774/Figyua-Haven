@@ -1,0 +1,44 @@
+create database bdproyectos;
+use bdproyectos;
+CREATE TABLE Productos (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre NVARCHAR(50),
+    ancho DOUBLE,
+    largo DOUBLE,
+    precio DOUBLE,
+    imagen NVARCHAR(50)
+);
+
+CREATE TABLE Usuarios (
+    IDU INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Nombre NVARCHAR(50),
+    ApellidoP NVARCHAR(50),
+    ApellidoM NVARCHAR(50),
+    Genero NVARCHAR(50),
+    FechaN date,
+    Correo NVARCHAR(50),
+    Usuario NVARCHAR(50),
+    Contrasena NVARCHAR(50),
+    Rango CHAR
+);
+
+/*Insertar*/
+insert into Productos (nombre,ancho,largo,precio,imagen) values ('Oshawott',2.5,4,150.00, 'Oshawott.jpg');
+insert into Usuarios (Nombre, ApellidoP, ApellidoM, Genero, FechaN, Correo, Usuario, Contrasena, Rango) values ('Juan', 'Perez', 'Díaz', 'Hombre', "01/01/2000", '1@gmail.com', 'Juan23', '12345678', 'e' );
+
+/*Mostrar*/
+SELECT * FROM productos;
+SELECT * FROM Usuarios;
+SELECT productos.id,productos.nombre,productos.ancho,productos.largo,productos.precio,productos.imagen FROM productos;
+SELECT * FROM usuarios WHERE usuario = ? AND correo = ? AND contrasena = ?;
+
+/*Actualizar*/
+update Productos SET productos.nombre=?, productos.ancho=?, productos.largo=?, productos.precio=?, productos.imagen=? WHERE productos.id=?;
+
+/*Eliminar*/
+DELETE FROM Productos WHERE productos.id = 8;
+DELETE FROM Usuarios WHERE usuarios.IDU = 3;
+
+ALTER TABLE productos AUTO_INCREMENT = 1;
+
+SHOW STATUS LIKE 'threads_connected';
