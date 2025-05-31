@@ -5,6 +5,7 @@
 package Formulario;
 
 import Clases.CUsuarios;
+import Clases.Correos;
 import javax.swing.*;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.RED;
@@ -275,7 +276,8 @@ public class LoginEmpresa extends javax.swing.JFrame {
         }
 
         if (c==true && co==true){
-            char rango = almacenador.encontrarUsuario(correo, contrasena);
+            String pass = Correos.encriptar(contrasena);
+            char rango = almacenador.encontrarUsuario(correo, pass);
             if (rango == 'c'){
                 ACaja cliente = new ACaja();
                 cliente.setVisible(true);

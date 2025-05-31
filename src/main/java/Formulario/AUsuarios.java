@@ -28,7 +28,7 @@ public class AUsuarios extends javax.swing.JFrame {
     public AUsuarios() {
         initComponents();
         
-        this.setLocation(70,90);
+        setLocationRelativeTo(null);
         
         Clases.CConexion objC = new Clases.CConexion();
         Clases.CUsuarios objU = new Clases.CUsuarios();
@@ -585,7 +585,7 @@ public class AUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVaciar2ActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        String n=txtNombre.getText();
+        String n=txtNombre3.getText();
         boolean rn=false;
         if (inicio.ValidarTexto(n)==true){
             rn=true;
@@ -707,7 +707,8 @@ public class AUsuarios extends javax.swing.JFrame {
         }
 
         if(rn==true&&rap==true&&ram==true&&rg==true&&rang==true&&rc==true&&ru==true&&rc1==true&&rc2==true){
-            almacenador.agregarUsuario(n, ap, am, g, JCalendario.getDate(), txtCorreo.getText(),txtContrasena2.getText(),r);
+            String pass = Correos.encriptar(txtContrasena2.getText());
+            almacenador.agregarUsuario(n, ap, am, g, JCalendario.getDate(), txtCorreo.getText(),pass,r);
             if(Correos.enviarCorreoConPDF(txtCorreo.getText(), Correos.generarPDF(n, ap, am, txtCorreo.getText(), txtContrasena1.getText()))){
                 JOptionPane.showMessageDialog(null, "Correo enviado");
             }

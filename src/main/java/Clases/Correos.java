@@ -11,7 +11,8 @@ import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Color;
 
 import java.io.*;
-import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -223,5 +224,42 @@ public class Correos{
             e.printStackTrace(); // muestra el error exacto en consola
             return false;
         }
+    }
+    
+    public static String encriptarM(String contraseña){
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(contraseña.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            
+            for(byte b : hash){
+                hexString.append(String.format("%02x", b));
+            }
+            
+            return hexString.toString();
+        }
+        catch(NoSuchAlgorithmException e){
+            throw new RuntimeException("Error al encriptar la contraseña", e);
+        }
+    }
+    
+    public static String encriptar(String texto){
+        StringBuilder resultado = new StringBuilder();
+        int desplazamiento = 3; //desplazamiento tipo César
+        
+        for(char c : texto.toCharArray()){
+            // Solo letras y dígitos
+            if (Character.isLetterOrDigit(c)){
+                char base = Character.isUpperCase(c) ? 'A' : (Character.isLowerCase(c) ? 'a' : '0');
+                int limite = Character.isDigit(c) ? 10 : 26;
+                char nuevo = (char) (base + (c - base + desplazamiento) % limite);
+                resultado.append(nuevo);
+            } else{
+                // Otros caracteres se agregan tal cual
+                resultado.append(c);
+            }
+        }
+        
+        return resultado.toString();
     }
 }

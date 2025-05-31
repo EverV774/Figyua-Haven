@@ -7,9 +7,11 @@ package Formulario;
 import Clases.Correos;
 import Clases.Validador;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,7 +37,7 @@ public class ACaja extends javax.swing.JFrame {
         
         //Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         //this.setSize(pantalla.width, pantalla.height);
-        this.setLocation(70,90);
+        setLocationRelativeTo(null);
         
         jLabel6.setVisible(false);
         jLabel7.setVisible(false);
@@ -62,6 +64,24 @@ public class ACaja extends javax.swing.JFrame {
         objP.mostrarProductos(tableTotalProductos);
         objC.cerrarC();
         
+    }
+    
+    private void moverCampo(JTextField campo){
+        Point puntoOriginal = campo.getLocation();
+        
+        new Thread(() -> {
+            try{
+                for (int i = 0; i < 10; i++){
+                    campo.setLocation(puntoOriginal.x + 5, puntoOriginal.y);
+                    Thread.sleep(30);
+                    campo.setLocation(puntoOriginal.x - 5, puntoOriginal.y);
+                    Thread.sleep(30);
+                }
+                campo.setLocation(puntoOriginal);
+            }catch(InterruptedException ex){
+                ex.printStackTrace();
+            }   
+        }).start();
     }
 
     /**
@@ -138,7 +158,7 @@ public class ACaja extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +168,7 @@ public class ACaja extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 498, 100));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 100));
 
         jPanel6.setBackground(new java.awt.Color(153, 153, 153));
         jPanel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -188,7 +208,7 @@ public class ACaja extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEnviarCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCobrarSin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +272,7 @@ public class ACaja extends javax.swing.JFrame {
                         .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPagoCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -288,14 +308,15 @@ public class ACaja extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtCorreo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtCorreo.setText("@");
-        jPanel8.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 240, 30));
+        jPanel8.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 240, 30));
 
         label3.setText("Correo:");
-        jPanel8.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 50, -1));
+        jPanel8.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 50, -1));
 
         lblCorreoError.setText("El correo no tiene la estructura correcta:");
-        jPanel8.add(lblCorreoError, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 240, -1));
+        jPanel8.add(lblCorreoError, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, -1));
 
         jPanel4.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 402, 350, 110));
 
@@ -682,33 +703,47 @@ public class ACaja extends javax.swing.JFrame {
 
     private void btnCobrarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarSinActionPerformed
         dialogRecibo.setVisible(false);
+        seleccion = "Efectivo";
+        lblCambio.setVisible(true);
+        txtCambio.setVisible(true);
+        lblCorreoError.setVisible(false);
         while (modeloCarrito.getRowCount() > 0) {
-                modeloCarrito.removeRow(0);
+            modeloCarrito.removeRow(0);
         }
     }//GEN-LAST:event_btnCobrarSinActionPerformed
 
     private void btnEnviarCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCorreoActionPerformed
         // TODO add your handling code here:
-        double pago = Double.parseDouble(txtPagoCon.getText());
-        if (inicio.validarCorreo(txtCorreo.getText().toLowerCase())==true){
-            Correos.enviarCorreoConPDFPago(txtCorreo.getText(), Correos.generarPDFRecibo(seleccion, list1, list2, list3, pago));
-            lblCorreoError.setVisible(false);
-            dialogRecibo.dispose();
-            while (modeloCarrito.getRowCount() > 0) {
-                modeloCarrito.removeRow(0);
+        if(!txtPagoCon.getText().equals("")){
+            double pago = Double.parseDouble(txtPagoCon.getText());
+            if (inicio.validarCorreo(txtCorreo.getText().toLowerCase())==true){
+                Correos.enviarCorreoConPDFPago(txtCorreo.getText(), Correos.generarPDFRecibo(seleccion, list1, list2, list3, pago));
+                lblCorreoError.setVisible(false);
+                seleccion = "Efectivo";
+                lblCambio.setVisible(true);
+                txtCambio.setVisible(true);
+                dialogRecibo.setVisible(false);
+                while (modeloCarrito.getRowCount() > 0) {
+                    modeloCarrito.removeRow(0);
+                }
+            } else{
+                lblCorreoError.setVisible(true);
+                lblCorreoError.setForeground(Color.red);
             }
-        } else{
-            lblCorreoError.setVisible(true);
-            lblCorreoError.setForeground(Color.red);
-        }
+        } else moverCampo(txtPagoCon);
     }//GEN-LAST:event_btnEnviarCorreoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        lblCorreoError.setVisible(false);
+        seleccion = "Efectivo";
+        lblCambio.setVisible(true);
+        txtCambio.setVisible(true);
         dialogRecibo.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
         // TODO add your handling code here:
+        lblCorreoError.setVisible(false);
          seleccion = "Transferencia";
         lblPagoCon.setText("Referencia:");
         txtPagoCon.setText("");
@@ -737,7 +772,7 @@ public class ACaja extends javax.swing.JFrame {
 
     private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
         // TODO add your handling code here:
-         seleccion = "Efectivo";
+        seleccion = "Efectivo";
         lblPagoCon.setText("Pago con:");
         
         lblCambio.setVisible(true);
@@ -747,7 +782,8 @@ public class ACaja extends javax.swing.JFrame {
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
         // TODO add your handling code here:
-         seleccion = "Tarjeta";
+        lblCorreoError.setVisible(false);
+        seleccion = "Tarjeta";
         lblPagoCon.setText("Referencia:");
         txtPagoCon.setText("");
         

@@ -4,7 +4,6 @@
  */
 package Formulario;
 
-import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +18,7 @@ public class AProductos extends javax.swing.JFrame {
     public AProductos() {
         initComponents();
         
-        this.setLocation(70,90);
+        setLocationRelativeTo(null);
         
         Clases.CConexion objC = new Clases.CConexion();
         Clases.CProductos objP = new Clases.CProductos();
