@@ -132,7 +132,7 @@ public class Correos{
         }
     }
     
-    public static boolean enviarCorreoConPDF(String destinatario, File archivoAdjunto){
+    public static int enviarCorreoConPDF(String destinatario, File archivoAdjunto){
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
         final String remitente = "figyuahaven647@gmail.com";
         final String clave = "zdcu bktx iwko lycm"; // Contraseña de aplicación
@@ -144,14 +144,14 @@ public class Correos{
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        Session session = Session.getInstance(props, new javax.mail.Authenticator(){
             @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
+            protected PasswordAuthentication getPasswordAuthentication(){
                 return new PasswordAuthentication(remitente, clave);
             }
         });
 
-        try {
+        try{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(remitente));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
@@ -170,16 +170,16 @@ public class Correos{
             multipart.addBodyPart(attachmentPart);
 
             message.setContent(multipart);
-            System.out.println("Enviando correo a: " + destinatario);
             Transport.send(message);
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace(); // muestra el error exacto en consola
-            return false;
+            return 1;
+        } catch (SendFailedException e){
+            return 0;
+        } catch (MessagingException e){
+            return -1;
         }
     }
     
-    public static boolean enviarCorreoConPDFPago(String destinatario, File archivoAdjunto){
+    public static int enviarCorreoConPDFPago(String destinatario, File archivoAdjunto){
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
         final String remitente = "figyuahaven647@gmail.com";
         final String clave = "zdcu bktx iwko lycm"; // Contraseña de aplicación
@@ -191,14 +191,14 @@ public class Correos{
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        Session session = Session.getInstance(props, new javax.mail.Authenticator(){
             @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
+            protected PasswordAuthentication getPasswordAuthentication(){
                 return new PasswordAuthentication(remitente, clave);
             }
         });
 
-        try {
+        try{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(remitente));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
@@ -217,12 +217,12 @@ public class Correos{
             multipart.addBodyPart(attachmentPart);
 
             message.setContent(multipart);
-            System.out.println("Enviando correo a: " + destinatario);
             Transport.send(message);
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace(); // muestra el error exacto en consola
-            return false;
+            return 1;
+        } catch (SendFailedException e){
+            return 0;
+        } catch (MessagingException e){
+            return -1;
         }
     }
     
@@ -245,17 +245,15 @@ public class Correos{
     
     public static String encriptar(String texto){
         StringBuilder resultado = new StringBuilder();
-        int desplazamiento = 3; //desplazamiento tipo César
+        int desplazamiento = 3;
         
         for(char c : texto.toCharArray()){
-            // Solo letras y dígitos
             if (Character.isLetterOrDigit(c)){
                 char base = Character.isUpperCase(c) ? 'A' : (Character.isLowerCase(c) ? 'a' : '0');
                 int limite = Character.isDigit(c) ? 10 : 26;
                 char nuevo = (char) (base + (c - base + desplazamiento) % limite);
                 resultado.append(nuevo);
             } else{
-                // Otros caracteres se agregan tal cual
                 resultado.append(c);
             }
         }

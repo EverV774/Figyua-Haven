@@ -155,6 +155,8 @@ public class AUsuarios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTotalUsuarios = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
+        label1 = new java.awt.Label();
 
         Registro.setModal(true);
         Registro.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -463,7 +465,7 @@ public class AUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -507,19 +509,37 @@ public class AUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableTotalUsuarios);
 
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
+        label1.setText("Buscar:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtBuscar)
+                    .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -562,7 +582,7 @@ public class AUsuarios extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Clases.CUsuarios objU = new Clases.CUsuarios();
-        String cn = correos.encriptar(txtContrasena.getText());
+        String cn = Correos.encriptar(txtContrasena.getText());
         txtContrasena.setText(cn);
         objU.modificarUsuario(txtID, txtNombre, txtApellidoP, txtApellidoM, txtGenero, txtCO, txtContrasena, txtRango);
         objU.mostrarUsuarios(tableTotalUsuarios);
@@ -721,11 +741,20 @@ public class AUsuarios extends javax.swing.JFrame {
         if(rn==true&&rap==true&&ram==true&&rg==true&&rang==true&&rc==true&&ru==true&&rc1==true&&rc2==true){
             String pass = Correos.encriptar(txtContrasena2.getText());
             almacenador.agregarUsuario(n, ap, am, g, JCalendario.getDate(), txtCorreo.getText(),pass,r);
-            if(Correos.enviarCorreoConPDF(txtCorreo.getText(), Correos.generarPDF(n, ap, am, txtCorreo.getText(), txtContrasena1.getText()))){
-                JOptionPane.showMessageDialog(null, "Correo enviado");
+            int verificacion = Correos.enviarCorreoConPDF(txtCorreo.getText(), Correos.generarPDF(n, ap, am, txtCorreo.getText(), txtContrasena1.getText()));
+            switch(verificacion){
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Correo enviado");
+                    Registro.setVisible(false);
+                    btnVaciar2.doClick();
+                break;
+                case 0:
+                    JOptionPane.showMessageDialog(null, "El correo no existe");
+                break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Ocurrio un error, revise su correo");
+                break;
             }
-            Registro.setVisible(false);
-            btnVaciar2.doClick();
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -779,6 +808,12 @@ public class AUsuarios extends javax.swing.JFrame {
             System.exit(0);   
         }
     }//GEN-LAST:event_RegistroWindowClosing
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        Clases.CUsuarios objU = new Clases.CUsuarios();
+        objU.buscarUsuarios(tableTotalUsuarios, txtBuscar.getText());
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -885,6 +920,7 @@ public class AUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
     private javax.swing.JRadioButton rAdmin;
     private javax.swing.JRadioButton rCaja;
     private javax.swing.JRadioButton rFemenino;
@@ -895,6 +931,7 @@ public class AUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtAP;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCO;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JPasswordField txtContrasena1;

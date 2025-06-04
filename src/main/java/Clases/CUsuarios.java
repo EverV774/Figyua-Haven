@@ -7,6 +7,7 @@ package Clases;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -188,11 +189,11 @@ public class CUsuarios {
         modelo.addColumn("Género");
         modelo.addColumn("Fecha N.");
         modelo.addColumn("Correo");
-        modelo.addColumn("Contraseña");
+        //modelo.addColumn("Contraseña");
         modelo.addColumn("Rango");
         
         tablaUsuarios.setModel(modelo);
-        sql = "SELECT usuarios.IDU, usuarios.Nombre, usuarios.ApellidoP, usuarios.ApellidoM, usuarios.Genero, usuarios.FechaN, usuarios.Correo, usuarios.Contrasena, usuarios.Rango FROM usuarios;";
+        sql = "SELECT usuarios.IDU, usuarios.Nombre, usuarios.ApellidoP, usuarios.ApellidoM, usuarios.Genero, usuarios.FechaN, usuarios.Correo, usuarios.Rango FROM usuarios;";
         
         try{
             Statement st = objC.establece().createStatement();
@@ -205,9 +206,9 @@ public class CUsuarios {
                 String gen = rs.getString("Genero");
                 Date fn = rs.getDate("FechaN");
                 String correo = rs.getString("Correo");
-                String contra = rs.getString("Contrasena");
+                //String contra = rs.getString("Contrasena");
                 String rango = rs.getString("Rango");
-                modelo.addRow(new Object[] {id, nom, ap, am, gen, fn, correo, contra, rango});
+                modelo.addRow(new Object[] {id, nom, ap, am, gen, fn, correo, rango});
             }
             tablaUsuarios.setModel(modelo);
             
@@ -229,8 +230,8 @@ public class CUsuarios {
             gen.setText(totalU.getValueAt(fila,4).toString());
             fn.setText(totalU.getValueAt(fila,5).toString());
             correo.setText(totalU.getValueAt(fila,6).toString());
-            contra.setText(totalU.getValueAt(fila,7).toString());
-            rango.setText(totalU.getValueAt(fila,8).toString());
+            contra.setText("- - -");
+            rango.setText(totalU.getValueAt(fila,7).toString());
             } 
         }
     
@@ -245,7 +246,7 @@ public class CUsuarios {
             cs.setString(3,am.getText());
             cs.setString(4,gen.getText());
             cs.setString(5,correo.getText());
-            cs.setString(6,contra.getText());
+            //cs.setString(6,contra.getText());
             cs.setString(7,rango.getText());
             
             cs.setInt(8,Integer.parseInt(id.getText()));
@@ -278,4 +279,53 @@ public class CUsuarios {
         }
     }
     
+    public void buscarUsuarios(JTable tablaUsuarios, String texto){
+        Clases.CConexion objC = new Clases.CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido P");
+        modelo.addColumn("Apellido M");
+        modelo.addColumn("Género");
+        modelo.addColumn("Fecha N.");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Rango");
+        
+        tablaUsuarios.setModel(modelo);
+        
+        String sql = "SELECT IDU, Nombre, ApellidoP, ApellidoM, Genero, FechaN, Correo, Rango " +
+                     "FROM usuarios WHERE Nombre LIKE ? OR IDU = ?";
+        
+        try{
+            PreparedStatement ps = objC.establece().prepareStatement(sql);
+            ps.setString(1, "%" + texto + "%");
+            
+            try{
+                ps.setInt(2, Integer.parseInt(texto));
+            } catch(NumberFormatException e){
+                ps.setInt(2, -1);
+            }
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                String id = rs.getString("IDU");
+                String nom = rs.getString("Nombre");
+                String ap = rs.getString("ApellidoP");
+                String am = rs.getString("ApellidoM");
+                String gen = rs.getString("Genero");
+                Date fn = rs.getDate("FechaN");
+                String correo = rs.getString("Correo");
+                String rango = rs.getString("Rango");
+                modelo.addRow(new Object[]{id, nom, ap, am, gen, fn, correo, rango});
+            }
+            
+            tablaUsuarios.setModel(modelo);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al buscar usuarios");
+        } finally{
+            objC.cerrarC();
+        }
+    }
 }

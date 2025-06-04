@@ -4,9 +4,10 @@
  */
 package Clases;
 
-import java.awt.Image;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -217,4 +218,52 @@ public class CProductos {
         }
     }
     
+    public void buscarProductos(JTable tablaProductos, String texto){
+        Clases.CConexion objC = new Clases.CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Ancho");
+        modelo.addColumn("Largo");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Imagen");
+        modelo.addColumn("Cantidad");
+        
+        tablaProductos.setModel(modelo);
+        
+        String sql = "SELECT id, nombre, ancho, largo, precio, imagen, cantidad " +
+                     "FROM productos WHERE nombre LIKE ? OR id = ?";
+        
+        try{
+            PreparedStatement ps = objC.establece().prepareStatement(sql);
+            ps.setString(1, "%" + texto + "%");
+            
+            try{
+                ps.setInt(2, Integer.parseInt(texto));
+            } catch(NumberFormatException e){
+                ps.setInt(2, -1);
+            }
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                String id = rs.getString("id");
+                String nom = rs.getString("nombre");
+                String a = rs.getString("ancho");
+                String l = rs.getString("largo");
+                String prec = rs.getString("precio");
+                String imag = rs.getString("imagen");
+                String cant = rs.getString("cantidad");
+
+                modelo.addRow(new Object[]{id, nom, a, l, prec, imag, cant});
+            }
+            
+            tablaProductos.setModel(modelo);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al buscar productos: " + e.getMessage());
+        } finally{
+            objC.cerrarC();
+        }
+    }
 }
