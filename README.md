@@ -1,7 +1,7 @@
 # Sistema de Punto de Venta - Figuras Coleccionables
 
-Este proyecto es una aplicación de **Punto de Venta** desarrollado en Java utilizando **NetBeans**, ademas fue conectada a una base de datos SQL para poder gestionar meg¿jor los datos. 
-Está diseñada específicamente para gestionar la venta de **figuras coleccionables**, es un sistema de gestión de usuarios, productos y caja.
+Este proyecto es una aplicación de **Punto de Venta** desarrollado en Java utilizando **NetBeans**, ademas fue conectada a una base de datos SQL para poder gestionar mejor los datos. 
+Está diseñada específicamente para gestionar la venta de **figuras coleccionables**, este es un sistema de gestión de usuarios, productos y caja.
 
 ## Características Principales
 
