@@ -60,12 +60,16 @@ El sistema cuenta con tres roles definidos:
    - `rango`
    - `productos`
 
-### Configurar la Conexión en el Proyecto
+### Configurar la Conexión de BD en el Proyecto
 
 1. Abrir el proyecto en NetBeans.
 2. Buscar la clase de conexión (`CConexion.java`).
 3. Editar los siguientes datos según tu entorno:
    ```java
-   String url = "jdbc:mysql://localhost:3306/punto_venta";
-   String user = "tu_usuario";
-   String password = "tu_contraseña";
+   String usuario="Tu_Usuario";
+   String contrasena="Tu_COntraseña";
+   String bd="Nombre_de_tu_Base_de_Datos";
+   String ip="Tu_ip (normalmente es 'locahost')";
+   String puerto="El_puerto (normalmente es '3306')";
+   
+   String cadena = "jdbc:mysql://" + ip + ":" + puerto + "/" + bd; // Esta linea se queda así.
