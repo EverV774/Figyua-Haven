@@ -27,6 +27,10 @@ import javax.activation.*;
  * @author Heber
  */
 public class Correos{
+    
+    private static final String remitente = "figyuahaven647@gmail.com"; // Correo electronico
+    private static final String clave = "zdcu bktx iwko lycm"; // Contraseña de aplicación
+    
     public static File generarPDF(String nombre, String apellido1, String apellido2, String correo, String pass){
         try {
             File file = new File("Agradecimiento.pdf");
@@ -134,8 +138,6 @@ public class Correos{
     
     public static int enviarCorreoConPDF(String destinatario, File archivoAdjunto){
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
-        final String remitente = "figyuahaven647@gmail.com";
-        final String clave = "zdcu bktx iwko lycm"; // Contraseña de aplicación
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -182,8 +184,6 @@ public class Correos{
     
     public static int enviarCorreoConPDFPago(String destinatario, File archivoAdjunto){
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
-        final String remitente = "figyuahaven647@gmail.com";
-        final String clave = "zdcu bktx iwko lycm"; // Contraseña de aplicación
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

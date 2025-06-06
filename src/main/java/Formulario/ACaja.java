@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +53,7 @@ public class ACaja extends javax.swing.JFrame {
         modeloCarrito.addColumn("Cantidad");
         tablaCarrito.setModel(modeloCarrito);
         
+        dialogRecibo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         txtCambio.setEditable(false);
         lblCorreoError.setVisible(false);
         
