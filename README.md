@@ -120,7 +120,7 @@ El sistema cuenta con tres roles definidos:
 
 ![Busqueda_ArchivoDumps](imagenes_Demostracion_Proyecto/busqueda_ArchivoDumps.png)
 
-![finalizar_Import](imagenes_Demostracion_Proyecto/finalizar_Import.png)
+![finalizar_Import](imagenes_Demostracion_Proyecto/finalizar_Importacion.png)
 
 ![BD_Finalizado](imagenes_Demostracion_Proyecto/BD_Finalizado.png)
 
