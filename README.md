@@ -11,6 +11,10 @@ Está diseñada específicamente para gestionar la venta de **figuras colecciona
 - Conexión a base de datos SQL para la persistencia de datos.
 - Interfaz gráfica desarrollada con Swing.
 
+## Tipos de Usuario
+
+El sistema cuenta con tres roles definidos:
+
 ### Administrador
 - Acceso total al sistema.
 - Puede **gestionar productos** y **usuarios** (añadir, editar, eliminar).
