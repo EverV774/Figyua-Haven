@@ -2,12 +2,14 @@
 
 Este proyecto es una aplicación de **Punto de Venta** desarrollado en Java utilizando **NetBeans**, ademas fue conectada a una base de datos SQL para poder gestionar mejor los datos. 
 Está diseñada específicamente para gestionar la venta de **figuras coleccionables**, este es un sistema de gestión de usuarios, productos y caja.
+Esta aplicación incluye el envío de correos electrónicos (por ejemplo, para confirmar ventas o enviar avisos de registros).
 
 ## Características Principales
 
 - Gestión de productos (agregar, editar, eliminar, buscar).
 - Registro de ventas.
 - Gestión de usuarios con roles que los diferencian de otros.
+- Envío automático de correos electrónicos.
 - Conexión a base de datos SQL para la persistencia de datos.
 - Interfaz gráfica desarrollada con Swing.
 
@@ -34,6 +36,7 @@ El sistema cuenta con tres roles definidos:
 - **MySQL**
 - **JDBC (Java Database Connectivity)**
 - **Swing (Interfaz gráfica)**
+- **Gmail SMTP (para correos)**
 
 ## Instalación y Ejecución
 
@@ -73,6 +76,30 @@ El sistema cuenta con tres roles definidos:
    String puerto = "El_puerto (normalmente es '3306')";
    
    String cadena = "jdbc:mysql://" + ip + ":" + puerto + "/" + bd; // Esta linea se queda así.
+
+### Configurar el envio de correos automáticos 
+
+1. Abrir el proyecto en NetBeans.
+2. Buscar la clase de correos (`Correos.java`).
+3. Edita las siguientes líneas para que el correo **remitente** sea el tuyo:
+   ```java
+   private static final String remitente = "Tu_Correo_Electronico (@gmail.com de preferencia)"; // Correo electronico
+   private static final String clave = "tu_contraseña_de_aplicacion (del correo remitente)"; // Contraseña de aplicación
+
+### ¿Cómo generar una contraseña de aplicación en Gmail?
+
+⚠️ Requiere que tengas activada la **verificación en dos pasos** en tu cuenta de Google.
+
+1. Ve a tu perfil de google.
+2. En el menú de la izquierda, selecciona **Seguridad**.
+3. En la sección **"Acceso a Google"**, haz clic en **Contraseñas de aplicaciones**.
+4. Inicia sesión si te lo pide.
+5. En el menú desplegable, selecciona **"Otro (nombre personalizado)"**.
+6. Escribe un nombre como `PuntoVenta` y haz clic en **Generar**.
+7. Google generará una contraseña única de **16 caracteres**.
+8. Copia esa contraseña y pégala en la clase `Correos.java`, en la línea donde se define `clave`:
+   ```java
+   private static final String clave = "tu_contraseña_de_aplicacion (del correo remitente)"; // Contraseña de aplicación
 
 ## Capturas de Pantalla
 
