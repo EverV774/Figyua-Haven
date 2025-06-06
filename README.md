@@ -103,7 +103,26 @@ El sistema cuenta con tres roles definidos:
    private static final String clave = "tu_contraseña_de_aplicacion (del correo remitente)"; // Contraseña de aplicación
 
 ## Capturas de Pantalla
+
 ![Login](imagenes_Demostracion_Proyecto/login.png)
+
+![login_Administrador](imagenes_Demostracion_Proyecto/login_Administrador.png)
+
+![gestion_Usuarios](imagenes_Demostracion_Proyecto/gestion_Usuarios.png)
+
+![gestion_Productos](imagenes_Demostracion_Proyecto/gestion_Productos.png)
+
+![gestion_Ventas](imagenes_Demostracion_Proyecto/gestion_Ventas.png)
+
+![realizar_Venta](imagenes_Demostracion_Proyecto/realizar_Venta.png)
+
+![data_Import](imagenes_Demostracion_Proyecto/data_Import.png)
+
+![Busqueda_ArchivoDumps](imagenes_Demostracion_Proyecto/busqueda_ArchivoDumps.png)
+
+![finalizar_Import](imagenes_Demostracion_Proyecto/finalizar_Import.png)
+
+![BD_Finalizado](imagenes_Demostracion_Proyecto/BD_Finalizado.png)
 
 ## Enlace al video en YouTube
 
