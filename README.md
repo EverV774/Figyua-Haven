@@ -2,7 +2,7 @@
 
 Este proyecto es una aplicación de **Punto de Venta** desarrollado en Java utilizando **NetBeans**, ademas fue conectada a una base de datos SQL para poder gestionar mejor los datos. 
 Está diseñada específicamente para gestionar la venta de **figuras coleccionables**, este es un sistema de gestión de usuarios, productos y caja.
-Esta aplicación incluye el envío de correos electrónicos (por ejemplo, para confirmar ventas o enviar avisos de registros).
+\n Esta aplicación incluye el envío de correos electrónicos (por ejemplo, para confirmar ventas o enviar avisos de registros).
 
 ## Características Principales
 
