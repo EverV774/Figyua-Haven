@@ -104,43 +104,43 @@ El sistema cuenta con tres roles definidos:
 
 ## Capturas de Pantalla
 
-Login del proyecto:
+#### Login del proyecto:
 
 ![Login](imagenes_Demostracion_Proyecto/login.png)
 
-Login del administrador:
+#### Login del administrador:
 
 ![login_Administrador](imagenes_Demostracion_Proyecto/login_Administrador.png)
 
-Ventana de la gestion de usuarios:
+#### Ventana de la gestion de usuarios:
 
 ![gestion_Usuarios](imagenes_Demostracion_Proyecto/gestion_Usuarios.png)
 
-Ventana de la gestion de productos:
+#### Ventana de la gestion de productos:
 
 ![gestion_Productos](imagenes_Demostracion_Proyecto/gestion_Productos.png)
 
-Ventana de la gestion de ventas:
+#### Ventana de la gestion de ventas:
 
 ![gestion_Ventas](imagenes_Demostracion_Proyecto/gestion_Ventas.png)
 
-Ventana para la realizar una venta:
+#### Ventana para la realizar una venta:
 
 ![realizar_Venta](imagenes_Demostracion_Proyecto/realizar_Venta.png)
 
-Imagen para la ocionde importar el archivo `.sql` de la base de datos.
+#### Imagen para la ocionde importar el archivo `.sql` de la base de datos.
 
 ![data_Import](imagenes_Demostracion_Proyecto/data_Import.png)
 
-Buscar el archivo `dumps` para realizar la importación.
+#### Buscar el archivo `dumps` para realizar la importación.
 
 ![Busqueda_ArchivoDumps](imagenes_Demostracion_Proyecto/busqueda_ArchivoDumps.png)
 
-Finalizar la importación.
+#### Finalizar la importación.
 
 ![finalizar_Import](imagenes_Demostracion_Proyecto/finalizar_Importacion.png)
 
-Verificar que se hayan creado las siguientes tablas:
+#### Verificar que se hayan creado las siguientes tablas:
 
 ![BD_Finalizado](imagenes_Demostracion_Proyecto/BD_Finalizado.png)
 
