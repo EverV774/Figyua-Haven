@@ -66,10 +66,25 @@ El sistema cuenta con tres roles definidos:
 2. Buscar la clase de conexión (`CConexion.java`).
 3. Editar los siguientes datos según tu entorno:
    ```java
-   String usuario="Tu_Usuario";
-   String contrasena="Tu_COntraseña";
-   String bd="Nombre_de_tu_Base_de_Datos";
-   String ip="Tu_ip (normalmente es 'locahost')";
-   String puerto="El_puerto (normalmente es '3306')";
+   String usuario = "Tu_Usuario";
+   String contrasena = "Tu_Contraseña";
+   String bd = "Nombre_de_tu_Base_de_Datos";
+   String ip = "Tu_ip (normalmente es 'locahost')";
+   String puerto = "El_puerto (normalmente es '3306')";
    
    String cadena = "jdbc:mysql://" + ip + ":" + puerto + "/" + bd; // Esta linea se queda así.
+
+## Capturas de Pantalla
+
+
+# Enlace al video en YouTube
+[![Demo del LabelPersonalizado](https://img.youtu.be/y6vOShTEtsw.jpg)](https://youtu.be/y6vOShTEtsw)
+
+
+👉 [click aquí](https://youtu.be/y6vOShTEtsw)
+
+## Autor
+
+[Álvarez Martínez Alessandro Santiago] (https://github.com/AleSantiagoAM)
+
+[Velasco Velasco Heber] (https://github.com/EverV774
