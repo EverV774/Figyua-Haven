@@ -79,7 +79,7 @@ El sistema cuenta con tres roles definidos:
 
 # Enlace al video en YouTube
 
-[![FigyuaHaven (Punto de Venta de Productos) en GitHub](https://img.youtube.com/vi/y6voShTEtsw/0.jpg)](https://www.youtube.com/watch?v=y6voShTEtsw)
+[![FigyuaHaven (Punto de Venta de Productos) en GitHub](https://img.youtube.com/vi/y6vOShTEtsw/0.jpg)](https://www.youtube.com/watch?v=y6vOShTEtsw)
 
 👉 [click aquí para ver el video](https://youtu.be/y6vOShTEtsw)
 
